@@ -96,7 +96,7 @@ services:
       # live system graph can be turned off
       - LIVE_SYSTEM=true
     volumes:
-      # to mount the bookmark.json and the icons folder on the system
+      # to mount the bookmarks.json and the icons folder on the system
       - ./storage:/app/storage
     ports:
       - "127.0.0.1:4000:4000"
