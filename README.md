@@ -1,4 +1,6 @@
-# Start-page
+# Launchpad
+
+A blazing fast start-page for your services written with Nuxt3 and Go.
 
 ![](https://img.shields.io/badge/Framework-Nuxt3-informational?style=for-the-badge&logo=nuxtdotjs&color=4FC08D)
 ![](https://img.shields.io/badge/Language-Typescript-informational?style=for-the-badge&logo=typescript&color=3178C6)
