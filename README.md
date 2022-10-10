@@ -48,13 +48,15 @@ PORT = 4000
 ALLOWED_HOSTS = "http://localhost:4000"
 SWAGGER = false
 
-LOG_LEVEL = "info" # trace,debug,info,warn,error,fatal,panic
+LOG_LEVEL = "info"
 
 LOCATION_LATITUDE = 48.780331609463815
 LOCATION_LONGITUDE = 9.177968320179422
 OPEN_WEATHER_KEY = ""
 OPEN_WEATHER_UNITS = "metric"
 OPEN_WEATHER_LANG = "en"
+
+LIVE_SYSTEM = true
 ```
 
 ## A docker-compose example:
