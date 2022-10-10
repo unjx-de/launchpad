@@ -12,11 +12,17 @@ A blazing fast start-page for your services written with Nuxt3 and Go.
 
 ## Dark Mode
 
-<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/screenshot_dark_V3.png" alt="dark_mode" width="500"/>
+<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/screenshot_dark.png" alt="dark_mode" width="500"/>
 
 ## Light Mode
 
-<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/screenshot_light_V3.png" alt="light_mode" width="500"/>
+<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/screenshot_light.png" alt="light_mode" width="500"/>
+
+## Lighthouse speed test
+
+<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/lighthouse.jpeg" alt="lighthouse" width="250"/>
+
+<img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/lighthouse_detail.jpeg" alt="lighthouse" width="500"/>
 
 ## How to use
 
