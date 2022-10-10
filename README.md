@@ -20,6 +20,8 @@ A blazing fast start-page for your services written with Nuxt3 and Go.
 
 ## Lighthouse speed test
 
+Emulated Moto G4 with Lighthouse 9.6.6, using headless chromium 102.0.5005.115:
+
 <img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/lighthouse.jpeg" alt="lighthouse" width="250"/>
 
 <img style="border-radius:0.5rem" src="https://filedn.eu/lhdsENsife1QUzPddOpRjb5/Launchpad/lighthouse_detail.jpeg" alt="lighthouse" width="500"/>
