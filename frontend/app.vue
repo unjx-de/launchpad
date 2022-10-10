@@ -27,7 +27,7 @@ const noError = computed(() => !bookmarksError.value && !weatherError.value && !
   <div class="mx-auto max-w-7xl px-5 lg:px-8 my-3 md:my-10 lg:my-18 xl:my-28">
     <Transition mode="out-in">
       <div v-if="doneLoading && noError">
-        <WeatherCard :weather="weather" />
+        <WeatherCard v-if="weather" :weather="weather" />
         <SystemView v-if="liveSystem && staticSystem" :liveSystem="liveSystem" :static-system="staticSystem" />
         <div v-if="bookmarks && bookmarks.length > 0">
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
