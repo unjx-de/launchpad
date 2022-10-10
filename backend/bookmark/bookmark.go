@@ -24,11 +24,14 @@ func Init() {
 func copyBookmarks() {
 	source, _ := os.Open(folder + bookmarksFile)
 	defer source.Close()
-	destination, _ := os.Create(desiredFolder + bookmarksFile)
-	defer destination.Close()
-	_, err := io.Copy(destination, source)
+	destination, err := os.Create(desiredFolder + bookmarksFile)
 	if err != nil {
-		logrus.WithField("file", bookmarksFile).Fatal(message.CannotCreate.String())
+		logrus.WithField("file", bookmarksFile).Error(message.CannotCreate.String())
+	}
+	defer destination.Close()
+	_, err = io.Copy(destination, source)
+	if err != nil {
+		logrus.WithField("file", bookmarksFile).Error(message.CannotCreate.String())
 	}
 }
 
@@ -38,19 +41,19 @@ func parseBookmarks() {
 		copyBookmarks()
 		jsonFile, err = os.Open(desiredFolder + bookmarksFile)
 		if err != nil {
-			logrus.WithField("file", bookmarksFile).Fatal(message.CannotOpen.String())
+			logrus.WithField("file", bookmarksFile).Error(message.CannotOpen.String())
 			return
 		}
 	}
 	defer jsonFile.Close()
 	byteValue, err := io.ReadAll(jsonFile)
 	if err != nil {
-		logrus.WithField("file", bookmarksFile).Fatal(message.CannotProcess.String())
+		logrus.WithField("file", bookmarksFile).Error(message.CannotProcess.String())
 		return
 	}
 	err = json.Unmarshal(byteValue, &Bookmarks)
 	if err != nil {
-		logrus.WithField("file", bookmarksFile).Fatal(message.CannotProcess.String())
+		logrus.WithField("file", bookmarksFile).Error(message.CannotProcess.String())
 		return
 	}
 }
