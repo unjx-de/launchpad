@@ -22,9 +22,14 @@ A blazing fast start-page for your services written with Nuxt3 and Go.
 
 Use the docker compose to spin up the service. The Weather is fetched over a [Current Weather Api Call](https://openweathermap.org/current) with environment variables for the needed parameters. Please refer to the available options as shown in the docker-compose example.
 
-### Example of the bookmark.json
+### Example of the bookmarks.json
 
-You can specify an icon of a bookmark either by using a link or by using the name of the file located inside the `./storage/icons` folder that is mounted via the docker compose command. The name and related link can be provided as well.
+All Bookmarks are read from a file called `bookmarks.json` located inside the `./storage` folder.
+The application will create a default file at startup and will automatically look for changes inside the file.
+Changes are printed in stdout when running with `LOG_LEVEL=trace`.
+
+You can specify an icon of a bookmark either by using a link or by using the name of the file located inside the `./storage/icons` folder that is mounted via the docker compose file.
+The name and related link can be provided as well.
 
 ```json
 [
