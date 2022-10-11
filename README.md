@@ -28,7 +28,10 @@ Emulated Moto G4 with Lighthouse 9.6.6, using headless chromium 102.0.5005.115:
 
 ## How to use
 
-Use the docker compose to spin up the service. The Weather is fetched over a [Current Weather Api Call](https://openweathermap.org/current) with environment variables for the needed parameters. Please refer to the available options as shown in the docker-compose example.
+Use the docker-compose to spin up the service.
+The Weather is fetched over a [Current Weather Api Call](https://openweathermap.org/current) with environment variables for the needed parameters.
+If you don't want to see the weather, do not provide a key as environment variable.
+Please refer to the available options as shown in the docker-compose example.
 
 ### Example of the bookmarks.json
 
@@ -91,16 +94,17 @@ services:
       - ALLOWED_HOSTS=https://home.example.com
       # available log-levels: trace,debug,info,warn,error,fatal,panic
       - LOG_LEVEL=info
-      # location: Stuttgart
-      - LOCATION_LATITUDE=48.644929601442485
-      - LOCATION_LONGITUDE=9.349618464869025
       # create account here to get free key:
       # https://home.openweathermap.org/users/sign_up
+      # remove to disable weather
       - OPEN_WEATHER_KEY=thisIsNoFunctioningKey
       # standard, metric or imperial
       - OPEN_WEATHER_UNITS=metric
       # https://openweathermap.org/current#multi
       - OPEN_WEATHER_LANG=en
+      # location is needed for weather
+      - LOCATION_LATITUDE=48.644929601442485
+      - LOCATION_LONGITUDE=9.349618464869025
       # live system graph can be turned off
       - LIVE_SYSTEM=true
     volumes:

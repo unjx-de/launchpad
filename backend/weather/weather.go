@@ -20,15 +20,17 @@ const configFile = "weather.toml"
 func Init() {
 	config.AddViperConfig(folder, configFile)
 	config.ParseViperConfig(&Config, configFile)
-	setWeatherUnits()
-	go updateWeather(time.Second * 150)
+	if Config.OpenWeather.Key != "" {
+		setWeatherUnits()
+		go updateWeather(time.Second * 150)
+	}
 }
 
 func setWeatherUnits() {
-	if Config.OpenWeather.Units == "metric" {
-		CurrentOpenWeather.Units = "°C"
-	} else {
+	if Config.OpenWeather.Units == "imperial" {
 		CurrentOpenWeather.Units = "°F"
+	} else {
+		CurrentOpenWeather.Units = "°C"
 	}
 }
 
