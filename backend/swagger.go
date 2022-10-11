@@ -14,7 +14,7 @@ import (
 func setupSwagger(router *gin.Engine) {
 	if server.Config.Swagger {
 		docs.SwaggerInfo.Title = "Backend Service"
-		docs.SwaggerInfo.Version = "3.0"
+		docs.SwaggerInfo.Version = "1.0.1"
 		docs.SwaggerInfo.BasePath = "/api"
 		parsed, _ := url.Parse(server.Config.AllowedHosts[0])
 		docs.SwaggerInfo.Host = parsed.Host
