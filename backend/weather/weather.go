@@ -50,10 +50,10 @@ func updateWeather(interval time.Duration) {
 			if err != nil {
 				logrus.WithField("error", err).Error(message.CannotProcess.String())
 			} else {
-				resp.Body.Close()
 				logrus.WithField("temp", fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units)).Trace("weather updated")
 			}
 		}
+		resp.Body.Close()
 		time.Sleep(interval)
 	}
 }
