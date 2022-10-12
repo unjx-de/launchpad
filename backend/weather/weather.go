@@ -44,16 +44,16 @@ func updateWeather(interval time.Duration) {
 			Config.OpenWeather.Lang))
 		if err != nil {
 			logrus.WithField("error", err).Error(message.CannotGet.String())
-			return
+		} else {
+			body, _ := io.ReadAll(resp.Body)
+			err = json.Unmarshal(body, &CurrentOpenWeather)
+			if err != nil {
+				logrus.WithField("error", err).Error(message.CannotProcess.String())
+			} else {
+				resp.Body.Close()
+				logrus.WithField("temp", fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units)).Trace("weather updated")
+			}
 		}
-		body, _ := io.ReadAll(resp.Body)
-		err = json.Unmarshal(body, &CurrentOpenWeather)
-		if err != nil {
-			logrus.WithField("error", err).Error(message.CannotProcess.String())
-			return
-		}
-		resp.Body.Close()
-		logrus.WithField("temp", fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units)).Trace("weather updated")
 		time.Sleep(interval)
 	}
 }
