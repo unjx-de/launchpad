@@ -1,5 +1,6 @@
 pipeline {
     environment {
+        VERSION = "v1.0.2"
         PROJECT_NAME = JOB_NAME.split('/')
         IMAGE_NAME = "unjxde/${PROJECT_NAME[0]}"
         IMAGE = ''
@@ -17,7 +18,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', 'dockerHub' ) {
-                        IMAGE.push("${BRANCH_NAME}")
+                        IMAGE.push("${VERSION}")
                         if (BRANCH_NAME == "main") {
                             IMAGE.push("latest")
                         }

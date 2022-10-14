@@ -13,11 +13,15 @@ import (
 
 func setupSwagger(router *gin.Engine) {
 	if server.Config.Swagger {
-		docs.SwaggerInfo.Title = "Backend Service"
-		docs.SwaggerInfo.Version = "1.0.1"
+		docs.SwaggerInfo.Title = "Launchpad"
+		docs.SwaggerInfo.Version = "1.0.2"
 		docs.SwaggerInfo.BasePath = "/api"
 		parsed, _ := url.Parse(server.Config.AllowedHosts[0])
 		docs.SwaggerInfo.Host = parsed.Host
+
+		// @contact.url   https://github.com/unjx-de/launchpad
+		// @license.name  MIT License
+		// @license.url   https://github.com/unjx-de/launchpad/blob/main/LICENSE
 
 		router.GET("/swagger", func(c *gin.Context) {
 			c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
