@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dashboard/auth"
 	"dashboard/bookmark"
 	"dashboard/logging"
 	"dashboard/message"
@@ -18,6 +19,7 @@ func main() {
 	weather.Init()
 	bookmark.Init()
 	system.Init()
+	auth.Init()
 
 	gin.SetMode(gin.ReleaseMode)
 	router := setupRouter()

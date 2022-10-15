@@ -8,12 +8,14 @@ import (
 	"strings"
 )
 
-func AddViperConfig(folder string, configFile string) {
-	viper.SetConfigFile(folder + configFile)
+func AddViperConfig(name string) string {
+	file := name + ".json"
+	viper.SetConfigFile(name + "/" + file)
 	err := viper.MergeInConfig()
 	if err != nil {
-		logrus.WithField("file", configFile).Fatal(message.CannotOpen.String())
+		logrus.WithField("file", name+".json").Fatal(message.CannotOpen.String())
 	}
+	return file
 }
 
 func ParseViperConfig(config interface{}, configFile string) {

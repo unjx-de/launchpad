@@ -38,10 +38,10 @@ COPY --from=logo /logo/logo.txt .
 
 # copy all the configuration files and default bookmark json
 COPY --from=go /backend/bookmark/bookmarks.json ./bookmark/bookmarks.json
-COPY --from=go /backend/logging/logging.toml ./logging/logging.toml
-COPY --from=go /backend/server/server.toml ./server/server.toml
-COPY --from=go /backend/weather/weather.toml ./weather/weather.toml
-COPY --from=go /backend/system/system.toml ./system/system.toml
+COPY --from=go /backend/logging/logging.json ./logging/logging.json
+COPY --from=go /backend/server/server.json ./server/server.json
+COPY --from=go /backend/weather/weather.json ./weather/weather.json
+COPY --from=go /backend/system/system.json ./system/system.json
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh

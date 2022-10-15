@@ -14,12 +14,8 @@ import (
 var Config = WeatherConfig{}
 var CurrentOpenWeather = OpenWeatherApiResponse{}
 
-const folder = "weather/"
-const configFile = "weather.toml"
-
 func Init() {
-	config.AddViperConfig(folder, configFile)
-	config.ParseViperConfig(&Config, configFile)
+	config.ParseViperConfig(&Config, config.AddViperConfig("weather"))
 	if Config.OpenWeather.Key != "" {
 		setWeatherUnits()
 		go updateWeather(time.Second * 150)
@@ -50,7 +46,7 @@ func updateWeather(interval time.Duration) {
 			if err != nil {
 				logrus.WithField("error", err).Error(message.CannotProcess.String())
 			} else {
-				logrus.WithField("temp", fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units)).Trace("weather updated")
+				logrus.WithFields(logrus.Fields{"temp": fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units), "location": CurrentOpenWeather.Name}).Trace("weather updated")
 			}
 		}
 		resp.Body.Close()
