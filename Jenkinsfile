@@ -18,9 +18,11 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', 'dockerHub' ) {
-                        IMAGE.push("${VERSION}")
                         if (BRANCH_NAME == "main") {
+                            IMAGE.push("${VERSION}")
                             IMAGE.push("latest")
+                        } else {
+                            IMAGE.push("${BRANCH_NAME}")
                         }
                     }
                 }
