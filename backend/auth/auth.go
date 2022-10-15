@@ -9,11 +9,13 @@ import (
 )
 
 var Config = AuthConfig{}
+var BlackList []Client
 
 const (
 	JwtExpiry         = 30 * 24 * time.Hour
 	sessionCookieName = "launchpad-session"
 	secretLength      = 40
+	maxLoginAttempts  = 3
 )
 
 func Init() {
@@ -44,4 +46,16 @@ func cookieAuthIsValid(c *gin.Context) bool {
 		return false
 	}
 	return validateJWT(token) == nil
+}
+
+func CheckBlackList(ip string) {
+	for i, v := range BlackList {
+		if v.IP == ip {
+			if v.Amount < maxLoginAttempts {
+				BlackList[i].Amount++
+			}
+			return
+		}
+	}
+	BlackList = append(BlackList, Client{IP: ip, Amount: 1})
 }

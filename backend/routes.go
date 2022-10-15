@@ -26,6 +26,12 @@ func login(c *gin.Context) {
 		auth.SetSessionCookie(c)
 		c.Status(http.StatusOK)
 	} else {
+		ip := c.GetHeader("X-Real-Ip")
+		if ip == "" {
+			ip = c.RemoteIP()
+		}
+		auth.CheckBlackList(ip)
+		logrus.WithField("blacklist", auth.BlackList).Trace("new member")
 		c.Status(http.StatusUnauthorized)
 	}
 }

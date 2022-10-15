@@ -8,3 +8,8 @@ type Auth struct {
 	Password string
 	Secret   string
 }
+
+type Client struct {
+	IP     string
+	Amount uint8
+}

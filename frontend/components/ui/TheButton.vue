@@ -5,7 +5,7 @@ interface Props {
   label?: string;
   disabled?: boolean;
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   btnStyle: "",
   color: "blue",
   label: "",

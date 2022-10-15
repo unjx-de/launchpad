@@ -29,8 +29,8 @@ function updateValue(e: any) {
     @keyup.esc="$emit('esc')"
     :type="type"
     :value="modelValue"
-    :class="`${inputClass} ${wrong ? 'border-red-500' : 'focus:border-blue-500'}`"
-    class="px-3 py-1.5 rounded border border-2 border-gray-300 disabled:bg-gray-300 outline-none text-gray-800"
+    :class="`${inputClass} ${wrong ? 'border-red-500' : 'border-gray-300 focus:border-blue-500'}`"
+    class="px-3 py-1.5 rounded border border-2 disabled:bg-gray-300 outline-none text-gray-800"
     :id="placeholder"
     :placeholder="placeholder"
   />

@@ -17,6 +17,7 @@ func setupRouter() *gin.Engine {
 	{
 		authGroup := api.Group("/auth")
 		{
+			authGroup.Use(auth.BlackListMiddleware())
 			authGroup.POST("login", login)
 			authGroup.POST("logout", logout)
 		}

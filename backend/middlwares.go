@@ -27,7 +27,7 @@ func myLogger() gin.HandlerFunc {
 		logrus.WithFields(logrus.Fields{
 			"status":  http.StatusText(c.Writer.Status()),
 			"latency": latencyTime,
-			"client":  c.RemoteIP(),
+			"client":  c.ClientIP(),
 			"method":  c.Request.Method,
 		}).Trace(reqUri)
 	}
