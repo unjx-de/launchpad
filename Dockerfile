@@ -42,6 +42,7 @@ COPY --from=go /backend/logging/logging.json ./logging/logging.json
 COPY --from=go /backend/server/server.json ./server/server.json
 COPY --from=go /backend/weather/weather.json ./weather/weather.json
 COPY --from=go /backend/system/system.json ./system/system.json
+COPY --from=go /backend/auth/auth.json ./auth/auth.json
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
