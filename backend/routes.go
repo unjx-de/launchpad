@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dashboard/auth"
 	"dashboard/bookmark"
 	"dashboard/message"
 	"dashboard/system"
@@ -10,6 +11,36 @@ import (
 	"github.com/sirupsen/logrus"
 	"net/http"
 )
+
+// @Schemes
+// @Summary     request login
+// @Description requests to log in
+// @Tags        auth
+// @Param       password header string true "password"
+// @Success     200      "OK"
+// @Failure     401      "Unauthorized"
+// @Router      /auth/login [post]
+func login(c *gin.Context) {
+	password := c.GetHeader("password")
+	if password == auth.Config.Auth.Password {
+		auth.SetSessionCookie(c)
+		c.Status(http.StatusOK)
+	} else {
+		auth.DeleteSessionCookie(c)
+		c.Status(http.StatusUnauthorized)
+	}
+}
+
+// @Schemes
+// @Summary     request logout
+// @Description requests to log out
+// @Tags        auth
+// @Success     200 "OK"
+// @Router      /auth/logout [post]
+func logout(c *gin.Context) {
+	auth.DeleteSessionCookie(c)
+	c.Status(http.StatusOK)
+}
 
 // @Schemes
 // @Summary     get all bookmarks

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dashboard/auth"
 	"dashboard/server"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -14,16 +15,24 @@ func setupRouter() *gin.Engine {
 
 	api := router.Group("/api")
 	{
+		authGroup := api.Group("/auth")
+		{
+			authGroup.POST("login", login)
+			authGroup.POST("logout", logout)
+		}
 		bookmarkGroup := api.Group("/bookmarks")
 		{
+			bookmarkGroup.Use(auth.CookieAuthRequired())
 			bookmarkGroup.GET("", getBookmarks)
 		}
 		weatherGroup := api.Group("/weather")
 		{
+			weatherGroup.Use(auth.CookieAuthRequired())
 			weatherGroup.GET("", getWeather)
 		}
 		systemGroup := api.Group("/system")
 		{
+			systemGroup.Use(auth.CookieAuthRequired())
 			systemGroup.GET("/static", routeStaticSystem)
 			systemGroup.GET("/live", routeLiveSystem)
 			systemGroup.GET("/ws", serveWs)
@@ -31,6 +40,7 @@ func setupRouter() *gin.Engine {
 	}
 	staticGroup := router.Group("/static")
 	{
+		staticGroup.Use(auth.CookieAuthRequired())
 		staticGroup.Use(cacheControl())
 		staticGroup.Static("", server.IconsDir)
 	}

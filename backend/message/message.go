@@ -18,6 +18,7 @@ const (
 	CannotOpen
 	CannotStart
 	CannotGet
+	NotLoggedIn
 	CannotProcess
 )
 
@@ -41,6 +42,8 @@ func (e Responses) String() string {
 		return "cannot start"
 	case CannotGet:
 		return "cannot get information"
+	case NotLoggedIn:
+		return "unauthorized, please provide token"
 	default:
 		return "cannot be processed"
 	}

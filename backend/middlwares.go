@@ -45,8 +45,8 @@ func setMiddlewares(router *gin.Engine) {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     server.Config.AllowedHosts,
 		AllowCredentials: true,
-		AllowHeaders:     []string{"content-type"},
-		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"content-type", "password"},
+		AllowMethods:     []string{"GET", "POST"},
 	}))
 
 	router.Use(myLogger())
