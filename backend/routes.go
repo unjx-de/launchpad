@@ -26,7 +26,6 @@ func login(c *gin.Context) {
 		auth.SetSessionCookie(c)
 		c.Status(http.StatusOK)
 	} else {
-		auth.DeleteSessionCookie(c)
 		c.Status(http.StatusUnauthorized)
 	}
 }
@@ -59,7 +58,7 @@ func getBookmarks(c *gin.Context) {
 // @Description gets the current weather
 // @Tags        weather
 // @Produce     json
-// @Success     200 {array}  weather.OpenWeatherApiResponse
+// @Success     200 {object} weather.OpenWeatherApiResponse
 // @Success     204 {object} message.Response
 // @Router      /weather [get]
 func getWeather(c *gin.Context) {
