@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dashboard/auth"
 	"dashboard/server"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/gzip"
@@ -27,7 +28,7 @@ func myLogger() gin.HandlerFunc {
 		logrus.WithFields(logrus.Fields{
 			"status":  http.StatusText(c.Writer.Status()),
 			"latency": latencyTime,
-			"client":  c.ClientIP(),
+			"client":  auth.GetRealIp(c),
 			"method":  c.Request.Method,
 		}).Trace(reqUri)
 	}

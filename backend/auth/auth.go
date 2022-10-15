@@ -48,6 +48,15 @@ func cookieAuthIsValid(c *gin.Context) bool {
 	return validateJWT(token) == nil
 }
 
+func ResetBlackList(ip string) {
+	for i, v := range BlackList {
+		if v.IP == ip {
+			BlackList[i].Amount = 1
+		}
+		break
+	}
+}
+
 func CheckBlackList(ip string) {
 	for i, v := range BlackList {
 		if v.IP == ip {
@@ -58,4 +67,12 @@ func CheckBlackList(ip string) {
 		}
 	}
 	BlackList = append(BlackList, Client{IP: ip, Amount: 1})
+}
+
+func GetRealIp(c *gin.Context) string {
+	ip := c.GetHeader("X-Real-Ip")
+	if ip == "" {
+		ip = c.RemoteIP()
+	}
+	return ip
 }

@@ -24,13 +24,10 @@ func login(c *gin.Context) {
 	password := c.GetHeader("password")
 	if password == auth.Config.Auth.Password {
 		auth.SetSessionCookie(c)
+		auth.ResetBlackList(auth.GetRealIp(c))
 		c.Status(http.StatusOK)
 	} else {
-		ip := c.GetHeader("X-Real-Ip")
-		if ip == "" {
-			ip = c.RemoteIP()
-		}
-		auth.CheckBlackList(ip)
+		auth.CheckBlackList(auth.GetRealIp(c))
 		logrus.WithField("blacklist", auth.BlackList).Trace("new member")
 		c.Status(http.StatusUnauthorized)
 	}
