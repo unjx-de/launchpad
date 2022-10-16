@@ -14,9 +14,6 @@ import (
 
 func myLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if logrus.GetLevel() != logrus.TraceLevel {
-			return
-		}
 		reqUri := c.Request.RequestURI
 		if strings.Contains(reqUri, "/storage") {
 			return
@@ -50,7 +47,9 @@ func setMiddlewares(router *gin.Engine) {
 		AllowMethods:     []string{"GET", "POST"},
 	}))
 
-	router.Use(myLogger())
+	if logrus.GetLevel() == logrus.TraceLevel {
+		router.Use(myLogger())
+	}
 	_ = router.SetTrustedProxies(server.Config.AllowedHosts)
 	logrus.WithField("allowedOrigins", server.Config.AllowedHosts).Debug("middlewares set")
 }
