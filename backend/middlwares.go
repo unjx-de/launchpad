@@ -15,7 +15,7 @@ import (
 func myLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		reqUri := c.Request.RequestURI
-		if strings.Contains(reqUri, "/storage") {
+		if strings.Contains(reqUri, "/static") {
 			return
 		}
 		startTime := time.Now()
