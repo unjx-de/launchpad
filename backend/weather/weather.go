@@ -2,7 +2,6 @@ package weather
 
 import (
 	"dashboard/config"
-	"dashboard/message"
 	"encoding/json"
 	"fmt"
 	"github.com/sirupsen/logrus"
@@ -39,17 +38,17 @@ func updateWeather(interval time.Duration) {
 			Config.OpenWeather.Units,
 			Config.OpenWeather.Lang))
 		if err != nil {
-			logrus.WithField("error", err).Error(message.CannotGet.String())
+			logrus.Error("weather cannot be updated")
 		} else {
 			body, _ := io.ReadAll(resp.Body)
 			err = json.Unmarshal(body, &CurrentOpenWeather)
 			if err != nil {
-				logrus.WithField("error", err).Error(message.CannotProcess.String())
+				logrus.Error("weather cannot be processed")
 			} else {
 				logrus.WithFields(logrus.Fields{"temp": fmt.Sprintf("%0.2f%s", CurrentOpenWeather.Main.Temp, CurrentOpenWeather.Units), "location": CurrentOpenWeather.Name}).Trace("weather updated")
 			}
+			resp.Body.Close()
 		}
-		resp.Body.Close()
 		time.Sleep(interval)
 	}
 }
