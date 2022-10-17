@@ -14,7 +14,7 @@ import (
 func setupSwagger(router *gin.Engine) {
 	if server.Config.Swagger {
 		docs.SwaggerInfo.Title = "Launchpad"
-		docs.SwaggerInfo.Version = "1.0.2"
+		docs.SwaggerInfo.Version = "1.0.3"
 		docs.SwaggerInfo.BasePath = "/api"
 		parsed, _ := url.Parse(server.Config.AllowedHosts[0])
 		docs.SwaggerInfo.Host = parsed.Host
