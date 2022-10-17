@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dashboard/auth"
 	"dashboard/server"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/gzip"
@@ -13,11 +14,8 @@ import (
 
 func myLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if logrus.GetLevel() != logrus.TraceLevel {
-			return
-		}
 		reqUri := c.Request.RequestURI
-		if strings.Contains(reqUri, "/storage") {
+		if strings.Contains(reqUri, "/static") {
 			return
 		}
 		startTime := time.Now()
@@ -27,7 +25,7 @@ func myLogger() gin.HandlerFunc {
 		logrus.WithFields(logrus.Fields{
 			"status":  http.StatusText(c.Writer.Status()),
 			"latency": latencyTime,
-			"client":  c.RemoteIP(),
+			"client":  auth.GetRealIp(c),
 			"method":  c.Request.Method,
 		}).Trace(reqUri)
 	}
@@ -45,11 +43,13 @@ func setMiddlewares(router *gin.Engine) {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     server.Config.AllowedHosts,
 		AllowCredentials: true,
-		AllowHeaders:     []string{"content-type"},
-		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"content-type", "password"},
+		AllowMethods:     []string{"GET", "POST"},
 	}))
 
-	router.Use(myLogger())
+	if logrus.GetLevel() == logrus.TraceLevel {
+		router.Use(myLogger())
+	}
 	_ = router.SetTrustedProxies(server.Config.AllowedHosts)
 	logrus.WithField("allowedOrigins", server.Config.AllowedHosts).Debug("middlewares set")
 }

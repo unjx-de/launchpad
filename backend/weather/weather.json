@@ -1,0 +1,11 @@
+{
+  "location": {
+    "latitude": 48.780331609463815,
+    "longitude": 9.177968320179422
+  },
+  "open_weather": {
+    "key": "",
+    "units": "metric",
+    "lang": "en"
+  }
+}

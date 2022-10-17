@@ -1,0 +1,5 @@
+{
+  "port": 4000,
+  "allowed_hosts": "http://localhost:4000",
+  "swagger": false
+}

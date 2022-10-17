@@ -9,12 +9,8 @@ import (
 var Config = SystemConfig{}
 var Live = Service{}
 
-const folder = "system/"
-const configFile = "system.toml"
-
 func Init() {
-	config.AddViperConfig(folder, configFile)
-	config.ParseViperConfig(&Config, configFile)
+	config.ParseViperConfig(&Config, config.AddViperConfig("system"))
 	if Config.LiveSystem {
 		Live.System.Initialize()
 		Live.Hub.Initialize()
