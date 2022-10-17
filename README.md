@@ -107,6 +107,11 @@ services:
       - LOCATION_LONGITUDE=9.349618464869025
       # live system graph can be turned off
       - LIVE_SYSTEM=true
+      # If you want to protect the dashboard with authentication
+      # provide a password and a secret.
+      # The secret will be randomly generated if not provided
+      - AUTH_PASSWORD=SuperSecurePassword
+      - AUTH_SECRET=SuperSecureSecret
     volumes:
       # to mount the bookmarks.json and the icons folder on the system
       - ./storage:/app/storage
