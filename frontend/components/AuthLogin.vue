@@ -25,21 +25,20 @@ function handleLogin() {
 
 <template>
   <div class="flex flex-col items-center">
-    <div>
-      <div class="flex w-full sm:w-80">
-        <TextInput
-          :disabled="loading"
-          inputClass="w-full mr-2"
-          v-model="password"
-          placeholder="Password"
-          type="password"
-          @enter="handleLogin"
-          @esc="password = ''"
-          :wrong="wrong"
-        />
-        <TheButton :disabled="loading" label="login" :color="wrong ? 'red' : 'blue'" @click="handleLogin" />
-      </div>
-      <div v-if="wrong" class="text-sm text-red-500 ml-2">please try again</div>
+    <div class="mb-5 text-lg">Please log in</div>
+    <div class="flex">
+      <TextInput
+        :disabled="loading"
+        inputClass="w-full mr-2"
+        v-model="password"
+        placeholder="Password"
+        type="password"
+        @enter="handleLogin"
+        @esc="password = ''"
+        :wrong="wrong"
+      />
+      <TheButton :disabled="loading" label="login" :color="wrong ? 'red' : 'blue'" @click="handleLogin" />
     </div>
+    <div v-if="wrong" class="text-sm text-red-500 ml-2">please try again</div>
   </div>
 </template>
