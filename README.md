@@ -1,5 +1,13 @@
 # Launchpad
 
+**#################### ARCHIVED ####################**
+
+I moved over to a *go-only* approach (SPEED!) and created a new project:
+
+[https://github.com/flohoss/godash](https://github.com/flohoss/godash)
+
+**#################### ARCHIVED ####################**
+
 A blazing fast start-page for your services written with Nuxt3 and Go.
 
 ![](https://img.shields.io/badge/Framework-Nuxt3-informational?style=for-the-badge&logo=nuxtdotjs&color=4FC08D)
